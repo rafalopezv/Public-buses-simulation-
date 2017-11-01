@@ -134,8 +134,8 @@ h
 ```
 <br>
 <left><small>- El tramo 1-2 sufre los mayores atrasos entre las 7 y 9 am, entre las 12 y 14 pm y 19-20 pm </small></left>
-<left><small>- El tramo 2-3 sufre los mayoes atrasos antre las 12 y 2 pm</small></left>
-<left><small>- El tramo 3-4 sufre los mayoes atrasos antre las 7 y 8 de la mañana</small></left>
+<left><small>- El tramo 2-3 sufre los mayores atrasos antre las 12 y 2 pm</small></left>
+<left><small>- El tramo 3-4 sufre los mayores atrasos antre las 7 y 8 de la mañana</small></left>
 <left><small>- Veamos el mimso gráfico pero sin valores extremos</small></left>
 
 ##
@@ -155,6 +155,7 @@ i
 j
 ```
 <left><small>los mayores atrasos no se dan en estos tramos</small></left>
+
 ##
 <br>
 <br>
