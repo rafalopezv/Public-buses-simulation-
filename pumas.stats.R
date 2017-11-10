@@ -97,6 +97,71 @@ d <- highchart(type = "stock") %>%
   hc_xAxis(title = list(text = "Fecha y hora de la partida del bus")) %>%
   hc_yAxis(title = list(text = "Minutos")) 
 
+# tiempo excluyendo días conflictivos
+a$dia <- day(a$rts)
+a %<>% filter(dia != 3 & dia != 4 & dia != 13 & dia != 14)
+
+# detalle de tiempos de parada 1 a parada final en dias no conflictivos
+c <- a %>% select(rts, tiempo)
+rownames(c) <- c[, 1] 
+c$tiempo %<>% round(., 1)
+c[, 1] <- NULL
+c %<>% xts::as.xts()
+
+noconf <- highchart(type = "stock") %>% 
+  hc_title(text = "Tiempo de viajes desde la primera a la última parada en días sin protesta social") %>% 
+  hc_subtitle(text = "4029 viajes en un mes") %>%
+  hc_add_series(c, id = "tiempo", name = "Tiempo") %>%
+  hc_add_theme(hc_theme_economist()) %>%
+  hc_xAxis(title = list(text = "Fecha y hora de la partida del bus")) %>%
+  hc_yAxis(title = list(text = "Minutos")) 
+
+# Boxplots por tramos tramos en dias sin  protestas 
+tramos <- puma %>% 
+  mutate(dia.del.mes = day(rts)) %>%
+  filter(dia.del.mes != 3 & dia.del.mes != 4 & dia.del.mes != 13 & dia.del.mes != 14 &
+           parada != 1) %>%
+  arrange(parada)
+
+tramos.noconf <- hcboxplot(x = tramos$tiempo.real.tramos.min, var = tramos$tramo, column = T) %>%  
+  hc_add_theme(hc_theme_elementary()) %>%
+  hc_xAxis(title = list(text = "Tramos")) %>%
+  hc_yAxis(title = list(text = "Minutos")) %>%
+  hc_title(text = "Tiempo de recorrido por tramos en días sin protestas sociales") %>%
+  hc_subtitle(text = "76562 tramos recorridos por mes")
+
+# Boxplots por tramos tramos en dias sin  protestas  quitando tramos 1-2 y 3-4
+tramos1 <- tramos %>% 
+  filter(tramo != "1 - 2" & tramo != "3 - 4")
+
+tramos.noconf1 <- hcboxplot(x = tramos1$tiempo.real.tramos.min, var = tramos1$tramo) %>%  
+  hc_add_theme(hc_theme_elementary()) %>%
+  hc_xAxis(title = list(text = "Tramos")) %>%
+  hc_yAxis(title = list(text = "Minutos")) %>%
+  hc_title(text = "Tiempo de recorrido por tramos en días sin protestas sociales") %>%
+  hc_subtitle(text = "68504 tramos recorridos por mes (excluyendo tramos con más demoras)")
+
+# boxplot por hora para tramos 1-2 3-4 en sin protestas sociales
+tramos2 <- tramos %>% 
+  filter(tramo == "1 - 2")
+
+tramos.noconf2 <- hcboxplot(x = tramos2$tiempo.real.tramos.min, var = tramos2$hora) %>%  
+  hc_add_theme(hc_theme_elementary()) %>%
+  hc_xAxis(title = list(text = "Hora")) %>%
+  hc_yAxis(title = list(text = "Minutos")) %>%
+  hc_title(text = "Tiempo de recorrido en el tramos 1-2 en días sin protestas sociales") %>%
+  hc_subtitle(text = "4029 tramos recorridos por mes")
+
+tramos2 <- tramos %>% 
+  filter(tramo == "3 - 4")
+
+tramos.noconf3 <- hcboxplot(x = tramos2$tiempo.real.tramos.min, var = tramos2$hora) %>%  
+  hc_add_theme(hc_theme_elementary()) %>%
+  hc_xAxis(title = list(text = "Hora")) %>%
+  hc_yAxis(title = list(text = "Minutos")) %>%
+  hc_title(text = "Tiempo de recorrido en el tramos 3-4 en días sin protestas sociales") %>%
+  hc_subtitle(text = "4029 tramos recorridos por mes")
+
 # tiempo en tramos y atraso en paradas
 e <- puma %>%
   group_by(parada, tramo) %>%
@@ -144,38 +209,11 @@ i <- hcboxplot(x = g$tiempo.real.tramos.min, var = g$hora, var2 = g$tramo,
   hc_subtitle(text = "14028 viajes en total, 4676 viajes por tramo") %>%
   hc_credits(enabled = TRUE, text = "Seleccionar tramo")
 
-# tiempos en tramos diferentes a 1-2, 3-4
-g <- puma %>% filter(tramo != "1 - 2" &
-                       tramo != "2 - 3" &
-                       tramo != "3 - 4") %>%
-  filter(parada != 1)
-  
-j <- hcboxplot(x = g$tiempo.real.tramos.min, var = g$hora, var2 = g$tramo,
-               outliers = T) %>% 
-  hc_chart(type = "column") %>%
-  hc_add_theme(hc_theme_elementary()) %>%
-  hc_xAxis(title = list(text = "Hora del día")) %>%
-  hc_yAxis(title = list(text = "Minutos")) %>%
-  hc_title(text = "Distribución de tiempos en tramos no problemáticos") %>%
-  hc_subtitle(text = "79492 viajes en total, 4676 viajes por tramo") %>%
-  hc_credits(enabled = TRUE, text = "Seleccionar tramo")
-
-
-
-
-# atrasos en salidas
-hchist(puma$atraso.salidas.minutos, showInLegend = FALSE) %>%
-  hc_title(text = "Minutos de atraso en las salidas de cada parada") %>%
-  hc_subtitle(text = "93520 salidas en un mes") %>%
-  hc_add_theme(hc_theme_db()) %>% #hc_theme_db
-  hc_xAxis(title = list(text = "Minutos"), max = 130) %>%
-  hc_yAxis(title = list(text = "Salidas"))
-
 # tiempo para subir pasajeros
-hchist(puma$tiempo.espera.real.segundos, showInLegend = FALSE, breaks = 20) %>%
+pasajeros <- hchist(puma$tiempo.espera.real.segundos, showInLegend = FALSE, breaks = 20) %>%
   hc_subtitle(text = "98196 paradas en un mes") %>%
   hc_title(text = "Tiempo para subir pasajeros") %>%
-  hc_add_theme(hc_theme_economist()) %>% #hc_theme_db
+  hc_add_theme(hc_theme_smpl()) %>% #hc_theme_sandsignika hc_theme_smpl
   hc_xAxis(title = list(text = "Segundos")) %>%
   hc_yAxis(title = list(text = "Paradas")) 
 
@@ -187,5 +225,13 @@ hchist(puma$`KM/H.real`, showInLegend = FALSE, breaks = 40) %>%
   hc_xAxis(title = list(text = "Kilómetros por hora")) %>%
   hc_yAxis(title = list(text = "Tramos")) 
 
-# 
+# atrasos en salidas
+hchist(puma$atraso.salidas.minutos, showInLegend = FALSE) %>%
+  hc_title(text = "Minutos de atraso en las salidas de cada parada") %>%
+  hc_subtitle(text = "93520 salidas en un mes") %>%
+  hc_add_theme(hc_theme_db()) %>% #hc_theme_db
+  hc_xAxis(title = list(text = "Minutos"), max = 130) %>%
+  hc_yAxis(title = list(text = "Salidas"))
+
+
 

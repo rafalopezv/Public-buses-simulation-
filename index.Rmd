@@ -1,8 +1,5 @@
 ---
-title: "Puma Katari & Big Data"
-subtitle: "700 mil datos analizando la calidad del servicio"
-author: "rafael lopez v."
-date: "Octubre 2017"
+title: 
 output: 
   revealjs::revealjs_presentation:
     transition: slide
@@ -11,20 +8,44 @@ output:
 source("pumas.stats.R")
 ```
 
-## 
+## {data-background=#CBF6FF}  
+<h6>Puma Kataris & Big Data</h6>
+<img src="img/bus2.png" style="background:none; border:none; box-shadow:none;" height="500" width="500px">
 <br>
-<br>
-<br>
-<br>
-<h2><center>Objetivo: Evaluar y mejorar el servicio de los Puma Katari con datos generados por los propios buses</center></h2>
+<small><h6>Rafael López V.</h6></small>
 
-## 
+##
+<h6>Antecedentes: 1er sistema de transporte urbano masivo en Bolivia</h6>
+<br>
+<img src="img/antecedentes.png" style="background:none; border:none; box-shadow:none;" height="448px" width="500px">
+
+<br>
+<small><small>Ver mas en: [lapazbus.bo](http://www.lapazbus.bo) </small></small>
+
+## {data-background=#CBF6FF}  
+<br>
+<br>
+
+<h2><center>Objetivos: 
+
+Mostrar que conectando los buses al Big Data el servicio puede ser monitoreado, segundo a segundo, y mejorado para el bien de la gente y del municipio</center></h2>
+
+## {data-background=#CBF6FF}  
+<h2><center>Para lograr el objetivo: 
+
+<br>
+Se han simulado casi 700 mil datos sobre el recorrido de los buses 
+
+La simulación trata de acercarse a la realidad lo más posible
+
+<img width="60" height="60" src="img/codigo.png" style="background:none; border:none; box-shadow:none;">
+
+## {data-background=#CBF6FF}  
 <br>
 <br>
 <br>
 <br>
-<br>
-<h2><center>Sobre el proyecto</center></h2>
+<h2><center>Alcances de la simulación</center></h2>
 
 ## Se eligió 1 de las 6 rutas
 <br>
@@ -36,54 +57,59 @@ source("pumas.stats.R")
 <br>
 <img src="img/direccion.png" style="background:none; border:none; box-shadow:none;">
 
-## Se supuso que los GPS de los buses generan datos
-<img src="img/info.png" style="background:none; border:none; box-shadow:none;">
-
-## Se tomaron los tiempos 5 veces (en condiciones normales)
+## 
+<h4>Se tomaron los tiempos 5 veces en horas que se suponen normales (sin tráfico, protestas, etc)</h4>
+<br>
 <img src="img/tiempo.png" style="background:none; border:none; box-shadow:none;">
 
-## Estas condiciones pueden alterarse por:
+## 
+<h3>Se introdujeron alteraciones predecibles a la normalidad</h3>
 
-- Paradas con mas gente que otras
+<br>
+
+<h3>- Paradas con más gente que otras
 
 - Tramos mas lentos que otros: tráfico vehicular
 
 - Marchas y bloqueos en el centro de la ciudad 
 
-- Horas que afectan los tiempos en los tramos (v.g. medio día vs. media noche)
+- Horas que afectan los tiempos en los tramos (v.g. medio día vs. media noche)</h3>
 
-- Los intervalos de partida se extrajeron de [aquí](http://www.lapazbus.bo/horarios/3/)
+## 
+<h4>Se supuso que los buses al pasar por las paradas generan automáticamente los datos<h4>
+<img src="img/info.png" style="background:none; border:none; box-shadow:none;">
 
 ## 
 <br>
 <br>
 <br>
 <br>
-<center><h2>Con todas estas características se simularon casi 700 mil datos en [R](https://www.r-project.org)</center></h2>
+<center><h2>Se computaron los intervalos [oficiales](http://www.lapazbus.bo/horarios/3/) de partida y con todo  lo anterior se simularon casi 700 mil datos en [R](https://www.r-project.org)</center></h2>
 <img width="60" height="60" src="img/codigo.png" style="background:none; border:none; box-shadow:none;">
 
 
 ##
+<h4>Muestra de la simulación en R</h4>
 <iframe width="1200" height="650" src="https://www.youtube.com/embed/iAGTwDc71rk?rel=0&amp;controls=0&amp;showinfo=0;autoplay=1" frameborder="0" allowfullscreen></iframe>
 
-##
+##{data-background=#CBF6FF}  
 <br>
 <br>
 <br>
 <br>
-<center><h2>La simulación generó </center></h2>
+<center><h2>Resultados de la simulación</center></h2>
 
 ##
 <br>
 <br>
-<img width="667" height="400" src="img/datos1.png" style="background:none; border:none; box-shadow:none;">
+<img width="600" height="400" src="img/datos1.png" style="background:none; border:none; box-shadow:none;">
 
-##
+##{data-background=#CBF6FF}
 <br>
 <br>
 <br>
 <br>
-<center><h2>Resultados </center></h2>
+<center><h2>Estadísticas: Sugiero que imagine que así se podrá monitorear el servicio</center></h2>
 
 ## 
 ```{r, echo=FALSE}
@@ -94,7 +120,7 @@ b
 <br>
 <left><small> - Sin embargo, a veces los buses tardan hasta 175 minutos (casi 3 horas)</small></left>
 <br>
-<left><small> - Veamos que días y a que horas se producen los mayores atrasos</small></left>
+<left><small> - Veamos qué días y a qué horas se producen los mayores atrasos</small></left>
 
 ## 
 ```{r, echo=FALSE, include=TRUE}
@@ -103,16 +129,14 @@ d
 <br>
 <left><small> - Los 4 picos muestran atrasos por protestas sociales  </small></left>
 <br>
-<left><small> - Hay una tendencia en los picos pequeños: mayores atrasos  alrededor de las 11 y 12 am y 8pm</small></left>
-<br>
-<left><small> - Pero.. en que tramos se producen los atrasos?</small></left>
+<left><small> - ¿En qué tramos están las protestas?</small></left>
 
 ##
 ```{r, echo=FALSE, include=TRUE}
 f
 ```
 <br>
-<left><small> - Los tramos entre las paradas 1 y 4 son los menos regulares. Los atrasos se generan allí</small></left>
+<left><small> - Los tramos entre las paradas 1 y 4 son los menos regulares. Los mayores  atrasos se generan allí</small></left>
 <br>
 <left><small> - Veamos en detalle estos tramos, sabiendo que son los que generan los atrasos</small></left>
 <br>
@@ -122,7 +146,7 @@ f
 <br>
 <br>
 <br>
-<center><h2>Para ver el atraso por tramos y horas utilicé "boxplots". Ver la siguiente explicación </center></h2>
+<center><h2>Para ver el atraso por tramos y horas se utilizaron "boxplots". Ver la siguiente explicación </center></h2>
 <img height="96px" width="140px" src="img/boxplots.png" style="background:none; border:none; box-shadow:none;">
 
 ##
@@ -133,30 +157,97 @@ f
 h
 ```
 <br>
-<left><small>- El tramo 1-2 sufre los mayores atrasos entre las 7 y 9 am, entre las 12 y 14 pm y 19-20 pm </small></left>
-<left><small>- El tramo 2-3 sufre los mayores atrasos antre las 12 y 2 pm</small></left>
-<left><small>- El tramo 3-4 sufre los mayores atrasos antre las 7 y 8 de la mañana</small></left>
-<left><small>- Veamos el mimso gráfico pero sin valores extremos</small></left>
+
+<left><small>Veamos el mismo gráfico pero sin valores extremos</small></left>
 
 ##
 ```{r, echo=FALSE, include=TRUE, fig.height=1200}
 i
 ```
 
-##
+## {data-background=#CBF6FF}
+<br>
+<center><h3>Hasta aquí: 
+
+Las protestas sociales en 4 días del mes produjeron los atrasos mas considerables
+
+Las protestas ocurren en el centro y perjudican a las paradas 1, 2 y 3 
+
+Las protestas afectan a los buses que transitan entre las 11am y 5pm</center></h3>
+
+## {data-background=#CBF6FF}
+<br>
+<br>
+<br>
+<center><h2>¿Los atrasos se dan únicamente por protestas sociales?
+<br>
+<br>
+Veamos los tiempos  de recorrido excluyendo los días de las protestas</center></h2>
+
+## 
+```{r, echo=FALSE, include=TRUE, fig.height=1200}
+noconf
+```
+<br>
+<center><h6>En días "calmados" el tiempo más rápido del Puma Katari es de 51 minutos pero el mas lento de 64 minutos</center></h6>
+
+## {data-background=#CBF6FF}
 <br>
 <br>
 <br>
 <br>
-<center><h2>Ahora veamos los tiempos en los tramos no conflictivos</center></h2>
+<center><h2>¿Qué tramos podrían corregirse y a qué horas para que los buses sean mas predecibles?</center></h2>
 
 ##
 ```{r, echo=FALSE, include=TRUE}
-j
+tramos.noconf
 ```
-<left><small>los mayores atrasos no se dan en estos tramos</small></left>
+<br>
+<h6>Los tramos 1-2 y 3-4 son los que tienen mayor variación
+<br>
+Antes cerciorémonos que los otros tramos no tienen variaciones extremas</h6>
+
+## 
+```{r, echo=FALSE, include=TRUE}
+tramos.noconf1
+```
+
+<small>La mayoría de los buses en estos tramos tienen variaciones de tiempo de menos de un minuto. Los problemas mas serios no están en estos tramos</small>
+
+## {data-background=#CBF6FF}
+<br>
+<br>
+<br>
+<br>
+<center><h2>Se sabe que los tramos 1-2 y 3-4 son los que generan los mayores atrasos. Pero, ¿a qué horas?</h2>
 
 ##
+```{r, echo=FALSE, include=TRUE}
+tramos.noconf2
+```
+<left><small>Los mayores problemas están a horas 7,8,9,13,14,19 y 20</small></left>
+
+##
+```{r, echo=FALSE, include=TRUE}
+tramos.noconf3
+```
+<left><small>Las distorsiones de tiempo están claramente a las 7 y 8 de la mañana</small></left>
+
+## {data-background=#CBF6FF}
+<br>
+<br>
+<br>
+<br>
+<center><h2>¿Es posible que los atrasos se originan por la tardanza de los pasajeron al subir al bus en horas y paradas pico?</center></h2>
+
+## 
+```{r, echo=FALSE, include=TRUE}
+pasajeros
+```
+Los pasajeron no contribuyen significativamente al atraso. En promedio un bus necesita 18.01 segundos 
+para subir a los pasajeros
+
+## {data-background=#CBF6FF}
 <br>
 <br>
 <br>
@@ -166,21 +257,33 @@ j
 ##
 <br>
 <br>
+<center><h4>Problema 1: protestas sociales</center></h4>
 <br>
+<h1>**77 días**</h1>
+<center><h4>Es la suma del tiempo perdido de los pasajeros en los 4 días de protestas</center></h4>
 <br>
-<center><h2>Los atrasos se dan por conflcitos sociales y también por demoras en horas picos en los tramos 1 al 4 (centro) particularmente</center></h2>
 
-## El objetivo es pasar del modelo azul al rojo: tiempo total del recorrido 
+##
+<br>
+<br>
+<center><h4>Problema 2: tramos y horas pico</center></h4>
+<br>
+<h1>**155 días**</h1>
+<br>
+<center><h4>Es la suma del tiempo perdido de los pasajeros excluyendo los 4 días de protestas en un mes<center><h4>
+
+## 
+<h2>El desafío es pasar del modelo azul al rojo: tiempo total del recorrido</h2>
 <img  src="img/objetivo.png" style="background:none; border:none; box-shadow:none;">
 
-## 
+## {data-background=#CBF6FF}
 <br>
 <br>
 <br>
 <br>
-<center><h2>Se sabe sobre que tramos y horas se debe actuar. Después, los datos nos dirán si las reformas son efectiuvas o no</center></h2>
+<center><h2>Se sabe sobre qué tramos y horas se debe actuar. Después, los datos nos dirán si las reformas son efectivas o no</center></h2>
 
-## 
+## {data-background=#CBF6FF}
 <br>
 <br>
 <br>
@@ -190,6 +293,15 @@ j
 ## 
 <img  src="img/propuesta.png" style="background:none; border:none; box-shadow:none;">
 
+##
+<img width="240" height="120"  src="img/sensorizar.png" style="background:none; border:none; box-shadow:none;">
+
+##
+<img width="650" height="112"  src="img/conectar.png" style="background:none; border:none; box-shadow:none;">
+ 
+##
+<img width="630" height="112"  src="img/google.png" style="background:none; border:none; box-shadow:none;">
+
 ## No se necesita mucho
 <br>
 <br>
@@ -198,15 +310,20 @@ j
 <br>
 <center><h2>Los datos para todas las rutas por año pesarían 19  gigabytes  o **4 DVD`s**</center></h2> 
 
-## 
+## {data-background=#CBF6FF}
+<br>
+<br>
+<br>
+<br>
+<br>
+<a href="mailto:lopezvalverde.rafael@gmail.com"><i class="fa fa-envelope"></i>  <a href="https://www.linkedin.com/in/rafael-lopez-valverde-a141a325/"><i class="fa fa-linkedin"></i></a>  <a href="https://github.com/rafalopezv"><i class="fa fa-github"></i></a>  <a href="https://twitter.com/rafa_lopezv"><i class="fa fa-twitter"></i></a>  <a href="https://www.facebook.com/profile.php?id=585845584"><i class="fa fa-facebook"></i> </a> <a href="tel:68188223"><i class="fa fa-mobile"></i></a>
 
-rafa lópez v
 
-- [<i class="fa fa-github"></i> GitHub](https://github.com/rafalopezv).
+<h6><font color="darkblue">rafa lópez v.</font></h6>
+ 
 
-- <a href="https://twitter.com/rafa_lopezv"><i class="fa fa-twitter"></i> @rafa_lopezv</a>
 
-- <a href="mailto:lopezvalverde.rafael@gmail.com"><i class="fa fa-envelope"></i> lopezvalverde.rafael@gmail.com</a>
 
-- <a href="https://www.facebook.com/profile.php?id=585845584"><i class="fa fa-facebook"></i> rafa</a>
+
+
 

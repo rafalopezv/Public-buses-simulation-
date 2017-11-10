@@ -6,6 +6,8 @@ date: "Octubre 2017"
 output: 
   revealjs::revealjs_presentation:
     transition: slide
+logo: img/bus.png
+biglogo: img/bus.png
 ---
 ```{r, echo=F, warning=FALSE, error=FALSE, include=FALSE}
 source("pumas.stats.R")
