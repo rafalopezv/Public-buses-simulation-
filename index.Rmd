@@ -295,20 +295,31 @@ para subir a los pasajeros
 
 ##
 <img width="240" height="120"  src="img/sensorizar.png" style="background:none; border:none; box-shadow:none;">
+<br>
+<br>
+<h6>-Programar los GPS's de los buses para que cuando pasen cerca de una parada se envíen automáticamente los datos a una central informática</h6>
+
+<h6>-Probar la sensorización con una ruta piloto</h6>
+
+<h6>-Estimar los requerimientos tecnológicos para sensorizar todas las rutas</h6>
 
 ##
 <img width="650" height="112"  src="img/conectar.png" style="background:none; border:none; box-shadow:none;">
- 
+<br>
+<br>
+<h6>-Probar el envío en tiempo real de la información de los buses a una base de datos</h6>
+
+<h6>-Programar el tratamiento automático de los datos una vez se emitan desde los buses y lleguen hasta las computadoras</h6>
+
+<h6>-Diseñar los indicadores de eficiencia y realizar pruebas piloto</h6>
+
 ##
 <img width="630" height="112"  src="img/google.png" style="background:none; border:none; box-shadow:none;">
+<br>
+<br>
+<h6>-Gestionar el procesamiento de los datos en vivo a google maps para que los usuarios sepan la localización y tiempo de arrivo de los buses</h6>
 
-## No se necesita mucho
-<br>
-<br>
-<center><h2>Los datos de la simulación pesan 14 megabytes o **2% de un DVD**</center></h2>
-<br>
-<br>
-<center><h2>Los datos para todas las rutas por año pesarían 19  gigabytes  o **4 DVD`s**</center></h2> 
+<h6>-Realización de pruebas de calidad</h6>
 
 ## {data-background=#CBF6FF}
 <br>

@@ -233,5 +233,20 @@ hchist(puma$atraso.salidas.minutos, showInLegend = FALSE) %>%
   hc_xAxis(title = list(text = "Minutos"), max = 130) %>%
   hc_yAxis(title = list(text = "Salidas"))
 
+# cálculo de horas perdidas
+temp <- puma %>% 
+  mutate(dia.mes = day(rts)) %>%
+  filter(dia.mes == 3 | dia.mes == 4 | dia.mes == 13 | dia.mes == 14) %>%
+  summarize(sum(atraso.real.de.ideal.min, na.rm = T))
+
+((temp/60)*10)/24 # perdida de tiempo pasajeros en días
+
+(temp/60)
+
+temp <- puma %>% 
+  mutate(dia.mes = day(rts)) %>%
+  filter(dia.mes != 3 & dia.mes != 4 & dia.mes != 13 & dia.mes != 14) %>%
+  summarize(sum(atraso.real.de.ideal.min, na.rm = T))
 
 
+((temp/60)*10)/24
